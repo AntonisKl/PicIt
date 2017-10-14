@@ -49,11 +49,9 @@ app.get('/getHistory/:userid', function(req, res) {
 
 app.get('/picture/:picid', function(req, res) {
     con.connect(function(err) {
-        console.log(req.params.picid.toString());
         con.query("select picturename from picture where pictureid = ?", [req.params.picid.toString()], function(err, rows) {
             if (rows.length == 0) return res.status(400).end();
             var filepath = rows[0].picturename;
-            console.log("hey");
             res.sendFile(path.resolve(rel_pictures + filepath));
         });
     });
@@ -110,9 +108,17 @@ app.get('/findStores/:prodId', function(req, res) {
     });
 });
 
+app.get('/store/:id', function(req, res) {
+    con.connect(function(err) {
+        con.query("select * from store where storeid = ?", [req.params.id], function(err, rows) {
+            return res.send(rows[0]);
+        })
+    });
+});
+
 app.get('store/:id/logo', function(req, res) {
     con.connect(function(err) {
-        con.query("select logo from store where storeid = ?", [req.params.id], function(err, res) {
+        con.query("select logo from store where storeid = ?", [req.params.id], function(err, rows) {
             if (rows.length == 0) return res.status(400).end();
             var filepath = rows[0].logo;
             res.sendFile(path.resolve(rel_shops + filepath));
@@ -121,14 +127,14 @@ app.get('store/:id/logo', function(req, res) {
 });
 
 app.get('/findSimilarProducts/:productid', function(req, res){
-   con.connect(function(err){
-       con.query("select ProductId,ProductName from product,product_has_tags pht1 where ProductId = Product_ProductId and ProductId != ? " +
-           "and not exists(select Tags_TagId from product_has_tags pht2 where not exists(select * from product_has_tags pht3 where ProductId != pht3.Product_ProductId and " +
-           "pht3.Tags_TagId = pht2.Tags_TagId)", [req.params.productid] , function(err, rows){
-           console.log(rows);
-           res.sendStatus(200).send(JSON.stringify(rows));
-       });
-   });
+    con.connect(function(err){
+        con.query("select ProductId,ProductName from product,product_has_tags pht1 where ProductId = Product_ProductId and ProductId != ? " +
+            "and not exists(select Tags_TagId from product_has_tags pht2 where not exists(select * from product_has_tags pht3 where ProductId != pht3.Product_ProductId and " +
+            "pht3.Tags_TagId = pht2.Tags_TagId)", [req.params.productid] , function(err, rows){
+            console.log(rows);
+            res.sendStatus(200).send(JSON.stringify(rows));
+        });
+    });
 });
 
 http.createServer(app).listen(3003, function(err) {
