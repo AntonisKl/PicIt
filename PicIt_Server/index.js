@@ -37,15 +37,11 @@ app.post("/adduser", function(req, res) {
 
 app.get('/getHistory/:userid', function(req, res) {
     con.connect(function(err) {
-        con.query("select * from picture where User_UserId = ? order by Time desc", [req.params.userid] , function(err, rows) {
-            console.log(rows);
-            res.sendStatus(200).send(JSON.stringify(rows));
         con.query("select pi.pictureid, pi.time, pr.* from picture pi, product pr, picture_depicts_product pdp where pi.user_userid = ? and pdp.picture_pictureid = pi.pictureid and pr.productid = pdp.product_productid order by pi.time desc", [req.params.userid], function(err, rows) {
             return res.send(rows);
         });
     });
 });
-    });
 
 app.get('/picture/:picid', function(req, res) {
     con.connect(function(err) {
