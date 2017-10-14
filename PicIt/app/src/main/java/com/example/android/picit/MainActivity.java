@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     User myUser;
-
+    FragmentManager fragmentManager = getFragmentManager();
+    
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
