@@ -100,11 +100,11 @@ public class MainActivity extends AppCompatActivity {
                     entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
                     entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
                     entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
+
+
+                    ListView listView =(ListView) findViewById(R.id.history_list);entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
 
                     HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(),entries);
-
-                    ListView listView =(ListView) findViewById(R.id.history_list);
                     listView.setAdapter(adapter);
                     return true;
             }

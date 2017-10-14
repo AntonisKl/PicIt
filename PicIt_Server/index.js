@@ -37,7 +37,7 @@ app.post("/adduser", function(req, res) {
 
 app.get('/getHistory/:userid', function(req, res) {
     con.connect(function(err) {
-        con.query("select * from picture where User_UserId = ? order by Time desc", [req.params.id] , function(err, rows) {
+        con.query("select * from picture where User_UserId = ? order by Time desc", [req.params.userid] , function(err, rows) {
             console.log(rows);
             res.sendStatus(200).send(JSON.stringify(rows));
         });
@@ -103,6 +103,15 @@ app.get('store/:id/logo', function(req, res) {
             res.sendFile(path.resolve(rel_shops + filepath));
         });
     });
+});
+
+app.get('/findSimilarProducts/:productid', function(req, res){
+   con.connect(function(err){
+       con.query("select Tags_TagId from product_has_tags where Product_ProductId = ? ", [req.params.productid] , function(err, rows){
+           console.log(rows);
+           res.sendStatus(200).send(JSON.stringify(rows));
+       });
+   });
 });
 
 http.createServer(app).listen(3003, function(err) {
