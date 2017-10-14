@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_dashboard:
                     ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
                     entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
+                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
+                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
+                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
 
                     HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(),entries);
 

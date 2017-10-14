@@ -29,6 +29,7 @@ public class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.history_item, parent, false);
+
         TextView nameView = (TextView) itemView.findViewById(R.id.product_name);
         TextView dateView = (TextView) itemView.findViewById(R.id.date);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.product_image);
