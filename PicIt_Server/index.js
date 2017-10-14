@@ -45,11 +45,9 @@ app.get('/getHistory/:userid', function(req, res) {
 
 app.get('/picture/:picid', function(req, res) {
     con.connect(function(err) {
-        console.log(req.params.picid.toString());
         con.query("select picturename from picture where pictureid = ?", [req.params.picid.toString()], function(err, rows) {
             if (rows.length == 0) return res.status(400).end();
             var filepath = rows[0].picturename;
-            console.log("hey");
             res.sendFile(path.resolve(rel_pictures + filepath));
         });
     });
@@ -106,9 +104,17 @@ app.get('/findStores/:prodId', function(req, res) {
     });
 });
 
+app.get('/store/:id', function(req, res) {
+    con.connect(function(err) {
+        con.query("select * from store where storeid = ?", [req.params.id], function(err, rows) {
+            return res.send(rows[0]);
+        })
+    });
+});
+
 app.get('store/:id/logo', function(req, res) {
     con.connect(function(err) {
-        con.query("select logo from store where storeid = ?", [req.params.id], function(err, res) {
+        con.query("select logo from store where storeid = ?", [req.params.id], function(err, rows) {
             if (rows.length == 0) return res.status(400).end();
             var filepath = rows[0].logo;
             res.sendFile(path.resolve(rel_shops + filepath));
