@@ -1,13 +1,17 @@
 package com.example.android.picit;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +25,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //mImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -31,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
                     dispatchTakePictureIntent();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
+                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
+
+                    HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(),entries);
+
+                    ListView listView =(ListView) findViewById(R.id.history_list);
+                    listView.setAdapter(adapter);
                     return true;
             }
             return false;
