@@ -4,8 +4,10 @@ var app = express();
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
+var dateTime = require('node-datetime');
 var multiparty = require('multiparty');
 var mysql = require('mysql');
+var crypto = require('crypto');
 var con = mysql.createConnection({
     host: "localhost",
     port: "3306",
@@ -22,11 +24,12 @@ app.use(bodyParser.json());
 
 var rel_products = './products/';
 var rel_shops = './shops/';
-var rel_pictures = './pictures';
+var rel_pictures = './pictures/';
 
 app.post("/adduser", function(req, res) {
     con.connect(function(err) {
         con.query("insert into user values ()", function(err, rows) {
+            console.log("New user created");
             return res.send(rows.insertId.toString());
         });
     });
@@ -47,11 +50,13 @@ app.post('/identifyProduct', function(req, res) {
     //image : image
     var form = new multiparty.Form();
     form.parse(req, function(err, fields, files) {
+        console.log(files);
+        console.log(fields);
         if (err) {
             throw err;
             return;
         }
-        if (fields.id == undefined) {
+        if (fields.userid == undefined) {
             return res.sendStatus(400).end();
         }
         con.connect(function(err) {
@@ -65,15 +70,17 @@ app.post('/identifyProduct', function(req, res) {
                     throw err;
                     return;
                 }
-                con.query("insert into picture values (?, ?, ?)", [null, , fields.userid], function(err, rows) {
+                var dt = dateTime.create();
+                var formatted = dt.format('Y-m-d H:M:S');
+                con.query("insert into picture values (?, ?, ?, ?)", [null, formatted, fields.userid, filename], function(err, rows) {
                     //hardcoded picture to product map
                     var picid = rows.insertId.toString();
                     con.query("insert into picture_depicts_product values (?,?)", [picid, 1], function(err, rows) {
                         con.query("select * from product where productId = ?", [1], function(err, rows) {
-                            return res.status(200).send(rows);
+                            console.log("ininin");
+                            return res.send(rows).end();
                         });
                     });
-                    return res.sendStatus(201).end();
                 });
             });
         });
@@ -83,7 +90,7 @@ app.post('/identifyProduct', function(req, res) {
 app.get('/findStores/:prodId', function(req, res) {
     con.connect(function(err) {
         con.query("select * from shops s where s.StoreId in (select shp.store_storeid from store_has_product shp where shp.product_productid = ?)", [req.params.prodId], function(err, rows) {
-            return res.sendStatus(200).send(rows);
+            return res.send(rows);
         });
     });
 });
