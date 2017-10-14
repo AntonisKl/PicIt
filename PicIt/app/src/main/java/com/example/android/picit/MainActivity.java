@@ -12,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Product> call, Throwable t) {
+                        Log.e("SVRERROR", t.toString());
                         Toast.makeText(MainActivity.this, "Error on uploading picture.", Toast.LENGTH_SHORT).show();
                     }
                 });

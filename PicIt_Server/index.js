@@ -78,7 +78,7 @@ app.post('/identifyProduct', function(req, res) {
                     con.query("insert into picture_depicts_product values (?,?)", [picid, 1], function(err, rows) {
                         con.query("select * from product where productId = ?", [1], function(err, rows) {
                             console.log("ininin");
-                            return res.send(rows).end();
+                            return res.send(rows[0]).end();
                         });
                     });
                 });
