@@ -89,23 +89,21 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
+         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    fragmentManager.popBackStackImmediate();
                     dispatchTakePictureIntent();
                     return true;
                 case R.id.navigation_dashboard:
-                    ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
 
-                    HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(),entries);
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    HistoryFragment fragment = HistoryFragment.newInstance("bla","bla");
+                    fragmentTransaction.replace(R.id.content, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
 
-                    ListView listView =(ListView) findViewById(R.id.history_list);
-                    listView.setAdapter(adapter);
                     return true;
             }
             return false;
