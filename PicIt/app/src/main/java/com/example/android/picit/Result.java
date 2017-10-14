@@ -5,7 +5,7 @@ package com.example.android.picit;
  */
 
 public class Result {
-    private int imgId;
+    private int imgId, shopId;
     private float Price;
     private String pName, pDescription;
 
@@ -47,5 +47,13 @@ public class Result {
 
     public void setPrice(float price) {
         Price = price;
+    }
+
+    public int getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 }

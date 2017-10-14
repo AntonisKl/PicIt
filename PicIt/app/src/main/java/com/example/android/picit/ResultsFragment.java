@@ -1,11 +1,13 @@
 package com.example.android.picit;
 
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class ResultsFragment extends android.app.Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+
 
     public ResultsFragment() {
         // Required empty public constructor
@@ -73,10 +77,29 @@ public class ResultsFragment extends android.app.Fragment {
         results.add(new Result(R.drawable.ic_home_black_24dp, "product name", "product description", (float) 53.50));
         results.add(new Result(R.drawable.ic_home_black_24dp, "product name", "product description", (float) 53.50));
 
-        ResultsAdapter adapter = new ResultsAdapter(getActivity(), results);
+        final ResultsAdapter adapter = new ResultsAdapter(getActivity(), results);
 
-        ListView listView = (ListView) view.findViewById(R.id.results_list);
+        final ListView listView = (ListView) view.findViewById(R.id.results_list);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Result result = (Result) parent.getItemAtPosition(position);
+
+//                example
+//                result.getShopId();
+
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                ShopFragment fragment = ShopFragment.newInstance("bla", "bla");
+                fragmentTransaction.replace(R.id.content, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
@@ -86,6 +109,7 @@ public class ResultsFragment extends android.app.Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+
         }
     }
 

@@ -2,21 +2,19 @@ package com.example.android.picit;
 
 import android.Manifest;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +28,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -43,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    User myUser;
     FragmentManager fragmentManager = getFragmentManager();
 
     private void dispatchTakePictureIntent() {
@@ -66,14 +64,14 @@ public class MainActivity extends AppCompatActivity {
                 RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), imgFile);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("image", imgFile.getName(), reqFile);
                 ServerInterface serverService = ServerClient.getClient(getApplicationContext()).create(ServerInterface.class);
-                Call<Product> findProduct = serverService.identifyProduct(User.getUserId(getApplicationContext()), body);
+                Call<Product> findProduct = serverService.identifyProduct(myUser.getUserId(getApplicationContext()), body);
                 findProduct.enqueue(new Callback<Product>() {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {
                         if (response.code() < 300) {
                             Product myProduct = response.body();
                             Toast.makeText(MainActivity.this, myProduct.getProductName(), Toast.LENGTH_SHORT).show();
-                            
+
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             ResultsFragment fragment = ResultsFragment.newInstance("bla", "bla");
                             fragmentTransaction.replace(R.id.content, fragment);
@@ -107,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_dashboard:
 
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    HistoryFragment fragment = HistoryFragment.newInstance("bla","bla");
+                    HistoryFragment fragment = HistoryFragment.newInstance("bla", "bla");
                     fragmentTransaction.replace(R.id.content, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
@@ -122,17 +120,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(!(ContextCompat.checkSelfPermission(this,
+        if (!(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.CAMERA}, 0);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
         }
-        if (User.getUserId(getApplicationContext())==-1) {
-            User.setUserId(getApplicationContext());
+        myUser = new User();
+        if (myUser.getUserId(getApplicationContext()) == -1) {
+            myUser.setUserId(getApplicationContext());
         }
         setContentView(R.layout.activity_main);
         dispatchTakePictureIntent();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
 
 }
