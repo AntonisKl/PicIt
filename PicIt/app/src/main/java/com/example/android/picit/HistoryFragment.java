@@ -1,14 +1,28 @@
 package com.example.android.picit;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.android.picit.SchemaClasses.HistoryElement;
+import com.example.android.picit.SchemaClasses.User;
+import com.example.android.picit.ServerHandler.ServerClient;
+import com.example.android.picit.ServerHandler.ServerInterface;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -50,18 +64,35 @@ public class HistoryFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
+        final View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-        ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
-        entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-        entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-        entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-        entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
+        ServerInterface serverService = ServerClient.getClient(getActivity().getApplicationContext()).create(ServerInterface.class);
+        Call<List<HistoryElement>> historyCall = serverService.getHistory(User.getUserId(getActivity().getApplicationContext()));
+        historyCall.enqueue(new Callback<List<HistoryElement>>() {
+            @Override
+            public void onResponse(Call<List<HistoryElement>> call, Response<List<HistoryElement>> response) {
+                if (response.code()<300) {
+                    List<HistoryElement> historyElements = response.body();
+                    ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
+                    int i=0;
+                    Log.d("ELEOS", ((Integer)historyElements.size()).toString());
+                    for (;i<historyElements.size();i++) {
+                        entries.add(new HistoryEntry(historyElements.get(i).getPictureId(), historyElements.get(i).getProductName(), historyElements.get(i).getDatetime(), historyElements.get(i).getProductId()));
+                    }
 
-        HistoryAdapter adapter = new HistoryAdapter(getActivity(), entries);
+                    HistoryAdapter adapter = new HistoryAdapter(getActivity(), entries);
 
-        ListView listView = (ListView) view.findViewById(R.id.history_list);
-        listView.setAdapter(adapter);
+                    ListView listView = (ListView) view.findViewById(R.id.history_list);
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<HistoryElement>> call, Throwable t) {
+
+            }
+        });
+
         return view;
     }
 

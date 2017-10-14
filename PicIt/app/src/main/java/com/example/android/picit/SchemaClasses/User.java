@@ -24,12 +24,12 @@ public class User {
     @SerializedName("UserId")
     private int userId;
 
-    public int getUserId(Context context) {
+    public static int getUserId(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getInt("usertoken", -1);
     }
 
-    public void setUserId(final Context context) {
+    public static void setUserId(final Context context) {
         ServerInterface serverService = ServerClient.getClient(context).create(ServerInterface.class);
         final SharedPreferences.Editor prefsedit = PreferenceManager.getDefaultSharedPreferences(context).edit();
         Call<Integer> addUserCall = serverService.addUser();

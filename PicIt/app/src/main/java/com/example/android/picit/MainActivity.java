@@ -1,6 +1,7 @@
 package com.example.android.picit;
 
 import android.Manifest;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    User myUser;
     FragmentManager fragmentManager = getFragmentManager();
     
     private void dispatchTakePictureIntent() {
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), imgFile);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("image", imgFile.getName(), reqFile);
                 ServerInterface serverService = ServerClient.getClient(getApplicationContext()).create(ServerInterface.class);
-                Call<Product> findProduct = serverService.identifyProduct(myUser.getUserId(getApplicationContext()), body);
+                Call<Product> findProduct = serverService.identifyProduct(User.getUserId(getApplicationContext()), body);
                 findProduct.enqueue(new Callback<Product>() {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {
@@ -119,9 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.CAMERA}, 0);
         }
-        myUser = new User();
-        if (myUser.getUserId(getApplicationContext())==-1) {
-            myUser.setUserId(getApplicationContext());
+        if (User.getUserId(getApplicationContext())==-1) {
+            User.setUserId(getApplicationContext());
         }
         setContentView(R.layout.activity_main);
         dispatchTakePictureIntent();

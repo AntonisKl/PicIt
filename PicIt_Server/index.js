@@ -37,9 +37,20 @@ app.post("/adduser", function(req, res) {
 
 app.get('/getHistory/:userid', function(req, res) {
     con.connect(function(err) {
-        con.query("select * from picture where User_UserId = ? order by Time desc", [req.params.id] , function(err, rows) {
-            console.log(rows);
-            res.sendStatus(200).send(JSON.stringify(rows));
+        con.query("select pi.pictureid, pi.time, pr.* from picture pi, product pr, picture_depicts_product pdp where pi.user_userid = ? and pdp.picture_pictureid = pi.pictureid and pr.productid = pdp.product_productid order by pi.time desc", [req.params.userid], function(err, rows) {
+            return res.send(rows);
+        });
+    });
+});
+
+app.get('/picture/:picid', function(req, res) {
+    con.connect(function(err) {
+        console.log(req.params.picid.toString());
+        con.query("select picturename from picture where pictureid = ?", [req.params.picid.toString()], function(err, rows) {
+            if (rows.length == 0) return res.status(400).end();
+            var filepath = rows[0].picturename;
+            console.log("hey");
+            res.sendFile(path.resolve(rel_pictures + filepath));
         });
     });
 });
@@ -89,7 +100,7 @@ app.post('/identifyProduct', function(req, res) {
 
 app.get('/findStores/:prodId', function(req, res) {
     con.connect(function(err) {
-        con.query("select * from shops s where s.StoreId in (select shp.store_storeid from store_has_product shp where shp.product_productid = ?)", [req.params.prodId], function(err, rows) {
+        con.query("select * from store s where s.StoreId in (select shp.store_storeid from store_has_product shp where shp.product_productid = ?)", [req.params.prodId], function(err, rows) {
             return res.send(rows);
         });
     });
