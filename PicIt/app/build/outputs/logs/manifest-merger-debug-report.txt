@@ -1,0 +1,111 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:2:1-29:12
+	package
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:3:5-40
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.CAMERA
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:5:5-65
+	android:name
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:5:22-62
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:6:5-80
+	android:name
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:6:22-78
+uses-feature#android.hardware.camera
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:8:5-10:35
+	android:required
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:10:9-32
+	android:name
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:9:9-47
+application
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:12:5-27:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\DimitrisLPC\.android\build-cache\833495a8529b20e417f851bf7e4332d83cb82e77\output\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:design:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\6f1dcd4de57726594dbeacb9c09ef840a510762f\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\26233514afaa5b80ddfd20261346ebca5f46949f\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\49d12ec4b80a46e842f237668f79d33ec8dc0a2a\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:transition:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\f273a642c0de7f7e0946f79b1f7e8b685d741ce0\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\cc7fd4be9e04b2869e3ee9a849ae07d99fead2a1\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\5d1cb811fc114c23bf198c5863471cd85d726f1a\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\c51e10d3b6ba118bd3b3469b5978728650ec2802\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\aac087ba084ee3537e13a6c1ba414696b5617b4c\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\545ae2f52138c9ede9e2e2fc4d76677433cb05d9\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\599f90e1757813f12337ddde0a52bdd447b06110\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\0084e65a5f21c1f69b81709621eb8a7848fddbbe\output\AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:15:9-41
+	android:supportsRtl
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:17:9-35
+	android:roundIcon
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:16:9-54
+	android:allowBackup
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:13:9-35
+	android:icon
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:14:9-43
+	android:theme
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:18:9-40
+activity#com.example.android.picit.MainActivity
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:19:9-26:20
+	android:exported
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:20:13-36
+	android:name
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:19:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:21:13-25:29
+action#android.intent.action.MAIN
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:22:17-69
+	android:name
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:22:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:24:17-77
+	android:name
+		ADDED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml:24:27-74
+uses-sdk
+INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\DimitrisLPC\.android\build-cache\833495a8529b20e417f851bf7e4332d83cb82e77\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:design:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\6f1dcd4de57726594dbeacb9c09ef840a510762f\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\26233514afaa5b80ddfd20261346ebca5f46949f\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\49d12ec4b80a46e842f237668f79d33ec8dc0a2a\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\fc44d6c38338075e0c42f9ef5c537cd228f1d7d4\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\f273a642c0de7f7e0946f79b1f7e8b685d741ce0\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\cc7fd4be9e04b2869e3ee9a849ae07d99fead2a1\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\5d1cb811fc114c23bf198c5863471cd85d726f1a\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\c51e10d3b6ba118bd3b3469b5978728650ec2802\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\aac087ba084ee3537e13a6c1ba414696b5617b4c\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\545ae2f52138c9ede9e2e2fc4d76677433cb05d9\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\599f90e1757813f12337ddde0a52bdd447b06110\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\0084e65a5f21c1f69b81709621eb8a7848fddbbe\output\AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\6f1dcd4de57726594dbeacb9c09ef840a510762f\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\GitHub\PicIt\PicIt\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\6f1dcd4de57726594dbeacb9c09ef840a510762f\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\26233514afaa5b80ddfd20261346ebca5f46949f\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\49d12ec4b80a46e842f237668f79d33ec8dc0a2a\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\fc44d6c38338075e0c42f9ef5c537cd228f1d7d4\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:transition:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\f273a642c0de7f7e0946f79b1f7e8b685d741ce0\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\cc7fd4be9e04b2869e3ee9a849ae07d99fead2a1\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\5d1cb811fc114c23bf198c5863471cd85d726f1a\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\c51e10d3b6ba118bd3b3469b5978728650ec2802\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\aac087ba084ee3537e13a6c1ba414696b5617b4c\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\545ae2f52138c9ede9e2e2fc4d76677433cb05d9\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\599f90e1757813f12337ddde0a52bdd447b06110\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\0084e65a5f21c1f69b81709621eb8a7848fddbbe\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\6f1dcd4de57726594dbeacb9c09ef840a510762f\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.1] C:\Users\DimitrisLPC\.android\build-cache\6f1dcd4de57726594dbeacb9c09ef840a510762f\output\AndroidManifest.xml:26:9-47

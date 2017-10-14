@@ -24,11 +24,20 @@ var rel_products = './products/';
 var rel_shops = './shops/';
 var rel_pictures = './pictures';
 
+app.post("/adduser", function(req, res) {
+    con.connect(function(err) {
+        //NEED TO MAKE USERID NULLABLE
+        con.query("insert into user values (null)", function(err, rows) {
+            return res.send(rows.insertId);
+        });
+    });
+});
+
 app.get('/getHistory/:userid', function(req, res) {
     con.connect(function(err) {
         con.query("select * from picture where User_UserId = ? order by Time desc", [req.params.id] , function(err, rows) {
             console.log(rows);
-            res.status(200).send(JSON.stringify(rows));
+            res.sendStatus(200).send(JSON.stringify(rows));
         });
     });
 });
@@ -44,7 +53,7 @@ app.post('/identifyProduct', function(req, res) {
             return;
         }
         if (fields.id == undefined) {
-            return res.status(400).end();
+            return res.sendStatus(400).end();
         }
         con.connect(function(err) {
             var oldpath = files.image[0].path;
@@ -65,7 +74,7 @@ app.post('/identifyProduct', function(req, res) {
                             return res.status(200).send(rows);
                         });
                     });
-                    return status(201).end();
+                    return res.sendStatus(201).end();
                 });
             });
         });
@@ -75,7 +84,17 @@ app.post('/identifyProduct', function(req, res) {
 app.get('/findStores/:prodId', function(req, res) {
     con.connect(function(err) {
         con.query("select * from shops s where s.StoreId in (select shp.store_storeid from store_has_product shp where shp.product_productid = ?)", [req.params.prodId], function(err, rows) {
-            return res.status(200).send(rows);
+            return res.sendStatus(200).send(rows);
+        });
+    });
+});
+
+app.get('store/:id/logo', function(req, res) {
+    con.connect(function(err) {
+        con.query("select logo from store where storeid = ?", [req.params.id], function(err, res) {
+            if (rows.length == 0) return res.status(400).end();
+            var filepath = rows[0].logo;
+            res.sendFile(path.resolve(rel_shops + filepath));
         });
     });
 });

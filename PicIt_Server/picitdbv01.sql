@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `picture`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `picture` (
-  `PictureId` int(11) NOT NULL,
+  `PictureId` int(11) NOT NULL AUTO_INCREMENT,
   `Time` datetime NOT NULL,
-  `User_UserId` int(11) NOT NULL,
+  `User_UserId` int(11),
   `PictureName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`PictureId`,`User_UserId`),
   KEY `fk_Picture_User_idx` (`User_UserId`),
@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
-  `ProductId` int(11) NOT NULL,
+  `ProductId` int(11) NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ProductId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS `store`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `store` (
-  `StoreId` int(11) NOT NULL,
+  `StoreId` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Url` varchar(45) DEFAULT NULL,
   `Logo` varchar(45) DEFAULT NULL,
@@ -183,7 +183,7 @@ DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tags` (
-  `TagId` int(11) NOT NULL,
+  `TagId` int(11) NOT NULL AUTO_INCREMENT,
   `TagName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`TagId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -207,7 +207,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `UserId` int(11) NOT NULL,
+  `UserId` int(11) AUTO_INCREMENT,
   PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

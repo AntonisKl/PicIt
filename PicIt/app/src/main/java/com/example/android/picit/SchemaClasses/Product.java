@@ -13,4 +13,11 @@ public class Product {
     @SerializedName("ProductName")
     private String productName;
 
+    public int getProductId() {
+        return ProductId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
 }
