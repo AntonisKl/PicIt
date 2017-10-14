@@ -1,5 +1,6 @@
 package com.example.android.picit.ServerHandler;
 
+import com.example.android.picit.SchemaClasses.HistoryElement;
 import com.example.android.picit.SchemaClasses.Product;
 import com.example.android.picit.SchemaClasses.Store;
 
@@ -24,6 +25,10 @@ public interface ServerInterface {
     @POST("/adduser")
     Call<Integer> addUser();
 
+    @GET("/getHistory/{userid}")
+    Call<List<HistoryElement>> getHistory(
+            @Path("userid") int userid
+    );
 
     @Multipart
     @POST("/identifyProduct")

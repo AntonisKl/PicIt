@@ -36,7 +36,7 @@ public class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
 
         nameView.setText(entries.get(position).getpName());
         dateView.setText(entries.get(position).getDate());
-        imageView.setImageResource(entries.get(position).getImgId());
+        entries.get(position).getImage(imageView, context);
 
         return itemView;
     }
