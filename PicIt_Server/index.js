@@ -26,9 +26,8 @@ var rel_pictures = './pictures';
 
 app.post("/adduser", function(req, res) {
     con.connect(function(err) {
-        //USERID IS NULLABLE
         con.query("insert into user values ()", function(err, rows) {
-            return res.send(rows.insertId);
+            return res.send(rows.insertId.toString());
         });
     });
 });
@@ -68,8 +67,8 @@ app.post('/identifyProduct', function(req, res) {
                 }
                 con.query("insert into picture values (?, ?, ?)", [null, , fields.userid], function(err, rows) {
                     //hardcoded picture to product map
-                    var picid = rows.insertId;
-                    con.query("insert into picture_depicts_product values (?,?)", [null, 1], function(err, rows) {
+                    var picid = rows.insertId.toString();
+                    con.query("insert into picture_depicts_product values (?,?)", [picid, 1], function(err, rows) {
                         con.query("select * from product where productId = ?", [1], function(err, rows) {
                             return res.status(200).send(rows);
                         });
