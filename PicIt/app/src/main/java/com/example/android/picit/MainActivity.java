@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     FragmentManager fragmentManager = getFragmentManager();
-    
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-         @Override
+        @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
@@ -99,22 +99,13 @@ public class MainActivity extends AppCompatActivity {
                     dispatchTakePictureIntent();
                     return true;
                 case R.id.navigation_dashboard:
-                    ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-                    entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-
-
-                    ListView listView =(ListView) findViewById(R.id.history_list);entries.add(new HistoryEntry(R.drawable.ic_dashboard_black_24dp, "name", "date"));
-
-                    HistoryAdapter adapter = new HistoryAdapter(getApplicationContext(),entries);
-                    listView.setAdapter(adapter);
 
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     HistoryFragment fragment = HistoryFragment.newInstance("bla","bla");
                     fragmentTransaction.replace(R.id.content, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
+
                     return true;
             }
             return false;
