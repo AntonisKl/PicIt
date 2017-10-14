@@ -26,8 +26,8 @@ var rel_pictures = './pictures';
 
 app.post("/adduser", function(req, res) {
     con.connect(function(err) {
-        //NEED TO MAKE USERID NULLABLE
-        con.query("insert into user values (null)", function(err, rows) {
+        //USERID IS NULLABLE
+        con.query("insert into user values ()", function(err, rows) {
             return res.send(rows.insertId);
         });
     });
