@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
             myUser.setUserId(getApplicationContext());
         }
         setContentView(R.layout.activity_main);
-        mTextMessage = (TextView) findViewById(R.id.message);
         dispatchTakePictureIntent();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
