@@ -69,6 +69,22 @@ public class ResultsFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_results, container, false);
+        
+        View view = inflater.inflate(R.layout.fragment_results, container, false);
+
+        ArrayList<SimilarProduct> similarProducts = new ArrayList<SimilarProduct>();
+        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
+        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
+        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
+        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
+
+        SimilarProductAdapter similarProductAdapter = new SimilarProductAdapter(similarProducts);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(similarProductAdapter);
+        
         ServerInterface serverService = ServerClient.getClient(getActivity().getApplicationContext()).create(ServerInterface.class);
         Call<List<StoreResult>> storeCall = serverService.findStores(productId);
         storeCall.enqueue(new Callback<List<StoreResult>>() {
