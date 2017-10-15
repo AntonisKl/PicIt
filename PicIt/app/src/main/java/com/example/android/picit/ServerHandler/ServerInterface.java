@@ -2,6 +2,7 @@ package com.example.android.picit.ServerHandler;
 
 import com.example.android.picit.SchemaClasses.HistoryElement;
 import com.example.android.picit.SchemaClasses.Product;
+import com.example.android.picit.SchemaClasses.ShopProductElement;
 import com.example.android.picit.SchemaClasses.Store;
 import com.example.android.picit.StoreResult;
 
@@ -41,6 +42,12 @@ public interface ServerInterface {
     @GET("/findStores/{prodId}")
     Call<List<StoreResult>> findStores(
             @Path("prodId") int productId
+    );
+
+    @GET("/getStoreDetails/{storeId}/{productId}")
+    Call<ShopProductElement> getStoreProductDetails(
+            @Path("storeId") int storeId,
+            @Path("productId") int productId
     );
 
     @GET("/findSimilarProducts/{productid}")

@@ -6,6 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.android.picit.SchemaClasses.ShopProductElement;
+import com.example.android.picit.ServerHandler.ServerClient;
+import com.example.android.picit.ServerHandler.ServerInterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -54,7 +64,33 @@ public class ShopFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+        final View view = inflater.inflate(R.layout.fragment_shop, container, false);
+        ServerInterface serverService = ServerClient.getClient(getActivity().getApplicationContext()).create(ServerInterface.class);
+        Call<ShopProductElement> detailsCall = serverService.getStoreProductDetails(shopId, productId);
+        detailsCall.enqueue(new Callback<ShopProductElement>() {
+            @Override
+            public void onResponse(Call<ShopProductElement> call, Response<ShopProductElement> response) {
+                if (response.code()<300) {
+                    ShopProductElement spElem = response.body();
+                    final ImageView logoImg = (ImageView)view.findViewById(R.id.shop_logo);
+                    final TextView websiteText = (TextView)view.findViewById(R.id.shop_website);
+                    final TextView productText = (TextView)view.findViewById(R.id.product_name);
+                    final TextView availableText = (TextView)view.findViewById(R.id.availability);
+                    final TextView priceText = (TextView)view.findViewById(R.id.price);
+                    spElem.getsImage(logoImg, getActivity().getApplicationContext());
+                    websiteText.setText(spElem.getUrl());
+                    productText.setText(spElem.getpName());
+                    availableText.setText(spElem.getQuantity());
+                    priceText.setText(spElem.getPrice());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ShopProductElement> call, Throwable t) {
+
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

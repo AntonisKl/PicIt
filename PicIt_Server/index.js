@@ -132,6 +132,16 @@ app.get('/findSimilarProducts/:productid', function(req, res){
     });
 });
 
+app.get('/getStoreDetails/:storeId/:productId', function(req, res) {
+    con.connect(function(err) {
+        con.query("select s.storeid, s.Name, s.Url, shp.price, shp.available_quantity, p.productname from store s, store_has_product shp, product p where s.storeid = ? and s.storeid = shp.store_storeid and shp.product_productid = ? and shp.product_productid = p.productid", [req.params.storeId, req.params.productId], function(err, rows) {
+            console.log(req.params.storeId + " " + req.params.productId);
+            console.log(rows);
+            return res.send(rows);
+        });
+    });
+});
+
 http.createServer(app).listen(3003, function(err) {
     console.log("HTTP server listening...");
 });

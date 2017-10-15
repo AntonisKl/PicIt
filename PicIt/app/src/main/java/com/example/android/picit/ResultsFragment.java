@@ -4,6 +4,8 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,8 +72,6 @@ public class ResultsFragment extends android.app.Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_results, container, false);
         
-        View view = inflater.inflate(R.layout.fragment_results, container, false);
-
         ArrayList<SimilarProduct> similarProducts = new ArrayList<SimilarProduct>();
         similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
         similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
