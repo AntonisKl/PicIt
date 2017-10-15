@@ -70,7 +70,6 @@ public class ResultsFragment extends android.app.Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_results, container, false);
         
-        View view = inflater.inflate(R.layout.fragment_results, container, false);
 
         ArrayList<SimilarProduct> similarProducts = new ArrayList<SimilarProduct>();
         similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
