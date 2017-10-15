@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.android.picit.SchemaClasses.Product;
-import com.example.android.picit.SchemaClasses.Store;
 import com.example.android.picit.ServerHandler.ServerClient;
 import com.example.android.picit.ServerHandler.ServerInterface;
 
@@ -80,7 +77,7 @@ public class ResultsFragment extends android.app.Fragment {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.code()<300) {
                     List<Product> similarProducts = response.body();
-                    SimilarProductAdapter spAdapter = new SimilarProductAdapter((ArrayList)similarProducts);
+                    SimilarProductAdapter spAdapter = new SimilarProductAdapter(getActivity(), (ArrayList)similarProducts,productId);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                     RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
                     recyclerView.setLayoutManager(layoutManager);

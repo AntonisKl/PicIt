@@ -1,5 +1,8 @@
 package com.example.android.picit;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,8 @@ import java.util.ArrayList;
 public class SimilarProductAdapter extends RecyclerView.Adapter<SimilarProductAdapter.ViewHolder> {
 
     private ArrayList<Product> products;
+    private Context context;
+    private int productId;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -35,8 +40,10 @@ public class SimilarProductAdapter extends RecyclerView.Adapter<SimilarProductAd
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SimilarProductAdapter(ArrayList<Product> products) {
+    public SimilarProductAdapter(Context context, ArrayList<Product> products, int productId) {
         this.products = products;
+        this.context = context;
+        this.productId = productId;
     }
 
     // Create new views (invoked by the layout manager)
@@ -48,6 +55,17 @@ public class SimilarProductAdapter extends RecyclerView.Adapter<SimilarProductAd
                 .inflate(R.layout.similar_product_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.app.FragmentManager fragmentManager = ((Activity)context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                ResultsFragment resultsFragment = ResultsFragment.newInstance(productId);
+                fragmentTransaction.replace(R.id.content, resultsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
 //        ImageView imageView = (ImageView) view.findViewById(R.id.similar_product_image);
 //        TextView textView = (TextView) view.findViewById(R.id.similar_product_name);

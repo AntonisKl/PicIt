@@ -1,15 +1,13 @@
 package com.example.android.picit;
 
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.picit.SchemaClasses.HistoryElement;
@@ -71,11 +69,11 @@ public class HistoryFragment extends android.app.Fragment {
         historyCall.enqueue(new Callback<List<HistoryElement>>() {
             @Override
             public void onResponse(Call<List<HistoryElement>> call, Response<List<HistoryElement>> response) {
-                if (response.code()<300) {
-                    List<HistoryElement> historyElements = response.body();
+                if (response.code() < 300) {
+                    final List<HistoryElement> historyElements = response.body();
                     ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
-                    int i=0;
-                    for (;i<historyElements.size();i++) {
+                    int i = 0;
+                    for (; i < historyElements.size(); i++) {
                         entries.add(new HistoryEntry(historyElements.get(i).getPictureId(), historyElements.get(i).getProductName(), historyElements.get(i).getDatetime(), historyElements.get(i).getProductId()));
                     }
 
@@ -83,6 +81,18 @@ public class HistoryFragment extends android.app.Fragment {
 
                     ListView listView = (ListView) view.findViewById(R.id.history_list);
                     listView.setAdapter(adapter);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            android.app.FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            ResultsFragment resultsFragment = ResultsFragment.newInstance(historyElements.get(position).getProductId());
+                            fragmentTransaction.replace(R.id.content, resultsFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    });
                 }
             }
 
