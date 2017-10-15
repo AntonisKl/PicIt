@@ -86,7 +86,6 @@ app.post('/identifyProduct', function(req, res) {
                     var picid = rows.insertId.toString();
                     con.query("insert into picture_depicts_product values (?,?)", [picid, 1], function(err, rows) {
                         con.query("select * from product where productId = ?", [1], function(err, rows) {
-                            console.log("ininin");
                             return res.send(rows[0]).end();
                         });
                     });
@@ -98,7 +97,7 @@ app.post('/identifyProduct', function(req, res) {
 
 app.get('/findStores/:prodId', function(req, res) {
     con.connect(function(err) {
-        con.query("select * from store s where s.StoreId in (select shp.store_storeid from store_has_product shp where shp.product_productid = ?)", [req.params.prodId], function(err, rows) {
+        con.query("select shp.store_storeid, shp.price, shp.description, s.name from store_has_product shp, store s where shp.product_productid = ? and s.storeid = shp.store_storeid", [req.params.prodId], function(err, rows) {
             return res.send(rows);
         });
     });

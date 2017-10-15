@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, myProduct.getProductName(), Toast.LENGTH_SHORT).show();
 
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            ResultsFragment fragment = ResultsFragment.newInstance("bla", "bla");
+                            ResultsFragment fragment = ResultsFragment.newInstance(myProduct.getProductId());
                             fragmentTransaction.replace(R.id.content, fragment);
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();

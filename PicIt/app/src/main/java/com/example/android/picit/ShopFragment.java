@@ -23,8 +23,8 @@ public class ShopFragment extends android.app.Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int shopId;
+    private int productId;
 
     private OnFragmentInteractionListener mListener;
 
@@ -32,11 +32,11 @@ public class ShopFragment extends android.app.Fragment {
         // Required empty public constructor
     }
 
-    public static ShopFragment newInstance(String param1, String param2) {
+    public static ShopFragment newInstance(int shopId, int productId) {
         ShopFragment fragment = new ShopFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, shopId);
+        args.putInt(ARG_PARAM2, productId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,8 +45,8 @@ public class ShopFragment extends android.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            shopId = getArguments().getInt(ARG_PARAM1);
+            productId = getArguments().getInt(ARG_PARAM2);
         }
     }
 

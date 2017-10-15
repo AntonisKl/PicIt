@@ -75,7 +75,6 @@ public class HistoryFragment extends android.app.Fragment {
                     List<HistoryElement> historyElements = response.body();
                     ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
                     int i=0;
-                    Log.d("ELEOS", ((Integer)historyElements.size()).toString());
                     for (;i<historyElements.size();i++) {
                         entries.add(new HistoryEntry(historyElements.get(i).getPictureId(), historyElements.get(i).getProductName(), historyElements.get(i).getDatetime(), historyElements.get(i).getProductId()));
                     }
