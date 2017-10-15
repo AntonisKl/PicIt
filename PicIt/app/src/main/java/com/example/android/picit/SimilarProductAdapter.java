@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.picit.SchemaClasses.Product;
+
 import java.util.ArrayList;
 
 /**
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 
 public class SimilarProductAdapter extends RecyclerView.Adapter<SimilarProductAdapter.ViewHolder> {
 
-    private ArrayList<SimilarProduct> products;
+    private ArrayList<Product> products;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -33,7 +35,7 @@ public class SimilarProductAdapter extends RecyclerView.Adapter<SimilarProductAd
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SimilarProductAdapter(ArrayList<SimilarProduct> products) {
+    public SimilarProductAdapter(ArrayList<Product> products) {
         this.products = products;
     }
 
@@ -59,9 +61,7 @@ public class SimilarProductAdapter extends RecyclerView.Adapter<SimilarProductAd
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
-        holder.imageView.setImageResource(products.get(position).getImgId());
-        holder.textView.setText(products.get(position).getpName());
+        holder.textView.setText(products.get(position).getProductName());
 
     }
 

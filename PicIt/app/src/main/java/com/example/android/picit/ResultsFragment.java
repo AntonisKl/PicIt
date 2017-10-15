@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.android.picit.SchemaClasses.Product;
 import com.example.android.picit.SchemaClasses.Store;
 import com.example.android.picit.ServerHandler.ServerClient;
 import com.example.android.picit.ServerHandler.ServerInterface;
@@ -71,19 +72,28 @@ public class ResultsFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_results, container, false);
-        ArrayList<SimilarProduct> similarProducts = new ArrayList<SimilarProduct>();
-        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
-        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
-        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
-        similarProducts.add(new SimilarProduct(R.drawable.ic_home_black_24dp, "product name"));
-
-        SimilarProductAdapter similarProductAdapter = new SimilarProductAdapter(similarProducts);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(similarProductAdapter);
         ServerInterface serverService = ServerClient.getClient(getActivity().getApplicationContext()).create(ServerInterface.class);
+        ArrayList<SimilarProduct> similarProducts = new ArrayList<SimilarProduct>();
+        Call<List<Product>> similarCall = serverService.findSimilarProducts(productId);
+        similarCall.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.code()<300) {
+                    List<Product> similarProducts = response.body();
+                    SimilarProductAdapter spAdapter = new SimilarProductAdapter((ArrayList)similarProducts);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                    RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(spAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+
         Call<List<StoreResult>> storeCall = serverService.findStores(productId);
         storeCall.enqueue(new Callback<List<StoreResult>>() {
             @Override

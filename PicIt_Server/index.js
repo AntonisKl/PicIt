@@ -125,9 +125,8 @@ app.get('/findSimilarProducts/:productid', function(req, res){
     con.connect(function(err){
         con.query("select ProductId,ProductName from product,product_has_tags pht1 where ProductId = Product_ProductId and ProductId != ? " +
             "and not exists(select Tags_TagId from product_has_tags pht2 where not exists(select * from product_has_tags pht3 where ProductId != pht3.Product_ProductId and " +
-            "pht3.Tags_TagId = pht2.Tags_TagId)", [req.params.productid] , function(err, rows){
-            console.log(rows);
-            res.sendStatus(200).send(JSON.stringify(rows));
+            "pht3.Tags_TagId = pht2.Tags_TagId))", [req.params.productid] , function(err, rows){
+            res.send(JSON.stringify(rows));
         });
     });
 });
