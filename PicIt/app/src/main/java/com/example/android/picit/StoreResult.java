@@ -24,7 +24,7 @@ public class StoreResult {
     private String sName;
 
 
-    public void getImgId(final ImageView imgView, Context context) {
+    public void getImg(final ImageView imgView, Context context) {
         Picasso.with(context)
                 .load("http://10.0.2.2:3003/store/" + shopId + "/logo")
                 .into(new Target() {

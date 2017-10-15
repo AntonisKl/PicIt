@@ -111,10 +111,10 @@ app.get('/store/:id', function(req, res) {
     });
 });
 
-app.get('store/:id/logo', function(req, res) {
+app.get('/store/:id/logo', function(req, res) {
     con.connect(function(err) {
-        con.query("select logo from store where storeid = ?", [req.params.id], function(err, rows) {
-            console.log(rows);
+        console.log("TEST");
+        con.query("select logo from store where storeid = ?", [req.params.id.toString()], function(err, rows) {
             if (rows.length == 0) return res.status(400).end();
             var filepath = rows[0].logo;
             res.sendFile(path.resolve(rel_shops + filepath));

@@ -40,7 +40,7 @@ public class ResultsAdapter extends ArrayAdapter<StoreResult> {
         nameView.setText(results.get(position).getsName());
         descriptionView.setText(results.get(position).getpDescription());
         priceView.setText("" + results.get(position).getPrice());
-        results.get(position).getImgId(imageView, context);
+        results.get(position).getImg(imageView, context);
 
         return itemView;
     }
