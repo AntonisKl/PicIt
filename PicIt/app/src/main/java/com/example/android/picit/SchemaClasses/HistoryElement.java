@@ -29,7 +29,8 @@ public class HistoryElement {
     }
 
     public String getDatetime() {
-        return datetime;
+        String formatteddatetime = datetime.substring(0, datetime.indexOf("T")) + " " + datetime.substring(datetime.indexOf("T")+1, datetime.indexOf("Z")-4);
+        return formatteddatetime;
     }
 
     public String getProductName() {
