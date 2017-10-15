@@ -70,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<Product> call, Response<Product> response) {
                         if (response.code() < 300) {
                             Product myProduct = response.body();
-                            Toast.makeText(MainActivity.this, myProduct.getProductName(), Toast.LENGTH_SHORT).show();
-
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             ResultsFragment fragment = ResultsFragment.newInstance(myProduct.getProductId());
                             fragmentTransaction.replace(R.id.content, fragment);

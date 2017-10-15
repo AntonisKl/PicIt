@@ -71,7 +71,7 @@ public class HistoryFragment extends android.app.Fragment {
             public void onResponse(Call<List<HistoryElement>> call, Response<List<HistoryElement>> response) {
                 if (response.code() < 300) {
                     final List<HistoryElement> historyElements = response.body();
-                    ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
+                    final ArrayList<HistoryEntry> entries = new ArrayList<HistoryEntry>();
                     int i = 0;
                     for (; i < historyElements.size(); i++) {
                         entries.add(new HistoryEntry(historyElements.get(i).getPictureId(), historyElements.get(i).getProductName(), historyElements.get(i).getDatetime(), historyElements.get(i).getProductId()));
@@ -87,7 +87,7 @@ public class HistoryFragment extends android.app.Fragment {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             android.app.FragmentManager fragmentManager = getFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            ResultsFragment resultsFragment = ResultsFragment.newInstance(historyElements.get(position).getProductId());
+                            ResultsFragment resultsFragment = ResultsFragment.newInstance(entries.get(position).getProdId());
                             fragmentTransaction.replace(R.id.content, resultsFragment);
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();

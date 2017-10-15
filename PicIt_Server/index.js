@@ -124,9 +124,7 @@ app.get('/store/:id/logo', function(req, res) {
 
 app.get('/findSimilarProducts/:productid', function(req, res){
     con.connect(function(err){
-        con.query("select ProductId,ProductName from product,product_has_tags pht1 where ProductId = Product_ProductId and ProductId != ? " +
-            "and not exists(select Tags_TagId from product_has_tags pht2 where not exists(select * from product_has_tags pht3 where ProductId != pht3.Product_ProductId and " +
-            "pht3.Tags_TagId = pht2.Tags_TagId))", [req.params.productid] , function(err, rows){
+        con.query("select p.ProductId, p.ProductName from product_has_tags phd1, product p where p.ProductId = phd1.Product_ProductId and phd1.Tags_TagId = (select pht2.tags_tagid from product_has_tags pht2 where pht2.Product_ProductId = ?) and phd1.Product_ProductId != ?", [req.params.productid, req.params.productid] , function(err, rows){
             res.send(JSON.stringify(rows));
         });
     });

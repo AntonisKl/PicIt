@@ -21,7 +21,7 @@ public class HistoryElement {
     private String datetime;
     @SerializedName("ProductName")
     private String productName;
-    @SerializedName("productId")
+    @SerializedName("ProductId")
     private int productId;
 
     public int getPictureId() {
