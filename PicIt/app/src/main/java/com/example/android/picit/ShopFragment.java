@@ -3,6 +3,7 @@ package com.example.android.picit;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,14 +81,14 @@ public class ShopFragment extends android.app.Fragment {
                     spElem.getsImage(logoImg, getActivity().getApplicationContext());
                     websiteText.setText(spElem.getUrl());
                     productText.setText(spElem.getpName());
-                    availableText.setText(spElem.getQuantity());
-                    priceText.setText(spElem.getPrice());
+                    availableText.setText("" + spElem.getQuantity());
+                    priceText.setText("" + spElem.getPrice());
                 }
             }
 
             @Override
             public void onFailure(Call<ShopProductElement> call, Throwable t) {
-
+                Log.d("mytag", t.toString());
             }
         });
         return view;

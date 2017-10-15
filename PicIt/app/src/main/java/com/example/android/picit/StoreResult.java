@@ -26,7 +26,7 @@ public class StoreResult {
 
     public void getImgId(final ImageView imgView, Context context) {
         Picasso.with(context)
-                .load("https://10.0.2.2:3003/store/" + shopId + "/logo")
+                .load("http://10.0.2.2:3003/store/" + shopId + "/logo")
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded (final Bitmap bitmap, Picasso.LoadedFrom from){
